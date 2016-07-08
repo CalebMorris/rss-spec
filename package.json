@@ -1,0 +1,17 @@
+{
+  "name": "rss-spec",
+  "version": "0.1.0",
+  "description": "RSS feed and item specification",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "RSS",
+    "xml",
+    "feed",
+    "spec"
+  ],
+  "author": "Caleb Morris <caleb.morris.g@gmail.com>",
+  "license": "MIT"
+}
