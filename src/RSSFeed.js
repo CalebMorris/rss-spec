@@ -6,7 +6,7 @@ import type moment from 'iflow-moment';
  * Base RSS feed specifications
  * Spec: http://cyber.law.harvard.edu/rss/rss.html
  */
-export default class RSSItem {
+export default class RSSFeed {
   constructor(
     title: string,
     link: string,
@@ -51,7 +51,7 @@ export default class RSSItem {
 
   static fromObject(data: any): RSSCategory {
     if (data && data.title && data.link && data.description) {
-      return new RSSItem(
+      return new RSSFeed(
         data.title,
         data.link,
         data.description,
