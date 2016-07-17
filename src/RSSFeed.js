@@ -1,3 +1,5 @@
+/* @flow */
+
 import RSSItem, { RSSCategory } from './RSSItem';
 
 import type moment from 'iflow-moment';
@@ -12,7 +14,7 @@ export default class RSSFeed {
     link: string,
     description: string,
     version: ?string = null,
-    items: Set<RSSItem> = [],
+    items: Set<RSSItem> = new Set([]),
     language: ?string = null,
     copyright: ?string = null,
     managingEditor: ?string = null,
@@ -49,7 +51,7 @@ export default class RSSFeed {
     this.skipDays = skipDays;
   }
 
-  static fromObject(data: any): RSSCategory {
+  static fromObject(data: any): RSSFeed {
     if (data && data.title && data.link && data.description) {
       return new RSSFeed(
         data.title,
@@ -118,7 +120,7 @@ export class RSSCloud {
     this.protocol = protocol;
   }
 
-  static fromObject(data: any): RSSCategory {
+  static fromObject(data: any): RSSCloud {
     if (data && data.domain && data.port && data.path && data.registerProcedure && data.protocol) {
       return new RSSCloud(
         data.domain,
@@ -155,7 +157,7 @@ export class RSSImage {
     this.description = description;
   }
 
-  static fromObject(data: any): RSSCategory {
+  static fromObject(data: any): RSSImage {
     if (data && data.content) {
       return new RSSImage(
         data.url,

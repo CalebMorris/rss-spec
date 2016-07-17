@@ -1,3 +1,5 @@
+/* @flow */
+
 import type moment from 'iflow-moment';
 
 /**

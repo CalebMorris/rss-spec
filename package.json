@@ -6,6 +6,7 @@
   "scripts": {
     "build": "rm -Rf ./dist && ./node_modules/.bin/babel ./src/ --out-dir ./dist/",
     "lint": "./node_modules/.bin/eslint src test *.js",
+    "flow": "./node_modules/.bin/flow check",
     "pretest": "npm run build",
     "test": "./node_modules/.bin/mocha --recursive",
     "prepublish": "npm run build"
@@ -33,6 +34,7 @@
     "eslint-config-honu-base": "git+ssh@gitlab.com:CalebMorris/eslint-config-honu-base.git",
     "eslint-plugin-flowtype": "^2.3.0",
     "eslint-plugin-react": "^5.2.2",
+    "flow-bin": "^0.29.0",
     "iflow-moment": "^1.1.13",
     "mocha": "^2.5.3"
   }
