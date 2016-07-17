@@ -27,7 +27,7 @@
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-stage-0": "^6.5.0",
     "eslint": "^3.0.1",
-    "eslint-config-honu-base": "file:///Users/calebmorris/code/honu/eslint-config-honu-base",
+    "eslint-config-honu-base": "git+ssh@gitlab.com:CalebMorris/eslint-config-honu-base.git",
     "eslint-plugin-flowtype": "^2.3.0",
     "eslint-plugin-react": "^5.2.2",
     "iflow-moment": "^1.1.13"
