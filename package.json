@@ -8,8 +8,7 @@
     "lint": "./node_modules/.bin/eslint src test *.js",
     "pretest": "npm run build",
     "test": "./node_modules/.bin/mocha --recursive",
-    "prepublish": "npm run build",
-    "postinstall": "[ -d ./dist/ ] || npm run build"
+    "prepublish": "npm run build"
   },
   "keywords": [
     "RSS",
