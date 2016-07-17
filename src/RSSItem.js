@@ -18,7 +18,7 @@ export default class RSSItem {
     enclosure: ?RSSEnclosure = null,
     guid: ?string = null,
     pubDate: ?moment = null,
-    source: ?string = null
+    source: ?RSSSource = null
   ) {
     this.title = title;
     this.description = description;
@@ -59,7 +59,7 @@ export default class RSSItem {
   enclosure: ?RSSEnclosure;
   guid: ?string; // GUID
   pubDate: ?moment;
-  source: ?string; // url
+  source: ?RSSSource; // url
 }
 
 export class RSSEnclosure {
@@ -92,7 +92,7 @@ export class RSSEnclosure {
 export class RSSCategory {
   constructor(
     content: string,
-    domain: ?string = null
+    domain?: ?string = null
   ) {
     this.content = content;
     this.domain = domain;
@@ -110,4 +110,21 @@ export class RSSCategory {
 
   content: string;
   domain: ?string; // URL
+}
+
+export class RSSSource {
+  constructor(
+    url: string
+  ) {
+    this.url = url;
+  }
+
+  static fromObject(data: any): RSSSource {
+    if (data && data.url) {
+      return new RSSSource(data.url);
+    }
+    throw new Error(`Missing required data to create a ${RSSSource.name}:[${JSON.stringify(data)}]`);
+  }
+
+  url: string;
 }
