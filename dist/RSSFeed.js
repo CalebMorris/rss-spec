@@ -23,7 +23,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var RSSFeed = function () {
   function RSSFeed(title, link, description) {
     var version = arguments.length <= 3 || arguments[3] === undefined ? null : arguments[3];
-    var items = arguments.length <= 4 || arguments[4] === undefined ? [] : arguments[4];
+    var items = arguments.length <= 4 || arguments[4] === undefined ? new Set([]) : arguments[4];
     var language = arguments.length <= 5 || arguments[5] === undefined ? null : arguments[5];
     var copyright = arguments.length <= 6 || arguments[6] === undefined ? null : arguments[6];
     var managingEditor = arguments.length <= 7 || arguments[7] === undefined ? null : arguments[7];
