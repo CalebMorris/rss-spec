@@ -1,4 +1,4 @@
-import { RSSCategory } from './RSSItem';
+import RSSItem, { RSSCategory } from './RSSItem';
 
 import type moment from 'iflow-moment';
 
@@ -12,7 +12,7 @@ export default class RSSFeed {
     link: string,
     description: string,
     version: ?string = null,
-    items: Set<string> = [],
+    items: Set<RSSItem> = [],
     language: ?string = null,
     copyright: ?string = null,
     managingEditor: ?string = null,
@@ -83,7 +83,7 @@ export default class RSSFeed {
 
   // Optional
   version: ?string;
-  items: Set<string>;
+  items: Set<RSSItem>;
   language: ?string; // WC3 spec: en-us
   copyright: ?string;
   managingEditor: ?string; // Email
