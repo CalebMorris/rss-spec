@@ -5,8 +5,8 @@
   "main": "./dist/index.js",
   "scripts": {
     "build": "rm -Rf ./dist && ./node_modules/.bin/babel . --ignore ./node_modules --out-dir ./dist/",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "./node_modules/.bin/eslint src test *.js"
+    "lint": "./node_modules/.bin/eslint src test *.js",
+    "prepublish": "npm run build"
   },
   "keywords": [
     "RSS",
