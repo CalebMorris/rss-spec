@@ -16,7 +16,7 @@ export default class RSSItem {
     category: ?RSSCategory = null,
     comments: ?string = null,
     enclosure: ?RSSEnclosure = null,
-    guid: ?string = null,
+    guid: ?RSSGuid = null,
     pubDate: ?moment = null,
     source: ?RSSSource = null
   ) {
@@ -57,7 +57,7 @@ export default class RSSItem {
   category: ?RSSCategory;
   comments: ?string; // URL
   enclosure: ?RSSEnclosure;
-  guid: ?string; // GUID
+  guid: ?RSSGuid; // GUID
   pubDate: ?moment;
   source: ?RSSSource; // url
 }
@@ -98,18 +98,35 @@ export class RSSCategory {
     this.domain = domain;
   }
 
-  static fromObject(data: any): RSSCategory {
+  static fromObject(data: Object): RSSCategory {
     if (data && data.content) {
       return new RSSCategory(
         data.content,
         data.domain
       );
     }
-    throw new Error(`Missing required data to create a RSSEnclosure:[${JSON.stringify(data)}]`);
+    throw new Error(`Missing required data to create a ${RSSCategory.name}:[${JSON.stringify(data)}]`);
   }
 
   content: string;
   domain: ?string; // URL
+}
+
+export class RSSGuid {
+  constructor(
+    isPermaLink?: ?boolean
+  ) {
+    this.isPermaLink = isPermaLink;
+  }
+
+  static fromObject(data: Object): RSSGuid {
+    if (data) {
+      return new RSSGuid(data.isPermaLink);
+    }
+    throw new Error(`Missing required data to create a ${RSSGuid.name}:[${JSON.stringify(data)}]`);
+  }
+
+  isPermaLink: ?boolean;
 }
 
 export class RSSSource {
