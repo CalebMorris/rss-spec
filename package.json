@@ -4,7 +4,7 @@
   "description": "RSS feed and item specification",
   "main": "./dist/index.js",
   "scripts": {
-    "build": "rm -Rf ./dist && ./node_modules/.bin/babel . --out-dir ./dist/ --ignore ./node_modules,./test",
+    "build": "rm -Rf ./dist && ./node_modules/.bin/babel ./src/ --out-dir ./dist/",
     "lint": "./node_modules/.bin/eslint src test *.js",
     "pretest": "npm run build",
     "test": "./node_modules/.bin/mocha --recursive",
