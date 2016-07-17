@@ -11,14 +11,14 @@ export default class RSSItem {
   constructor(
     title: string,
     description: string,
-    link: ?string = null,
-    author: ?string = null,
-    category: ?RSSCategory = null,
-    comments: ?string = null,
-    enclosure: ?RSSEnclosure = null,
-    guid: ?RSSGuid = null,
-    pubDate: ?moment = null,
-    source: ?RSSSource = null
+    link?: ?string = null,
+    author?: ?string = null,
+    category?: ?RSSCategory = null,
+    comments?: ?string = null,
+    enclosure?: ?RSSEnclosure = null,
+    guid?: ?RSSGuid = null,
+    pubDate?: ?moment = null,
+    source?: ?RSSSource = null
   ) {
     this.title = title;
     this.description = description;
@@ -47,7 +47,7 @@ export default class RSSItem {
         data.source
       );
     }
-    throw new Error(`Missing required data to create a RSSItem:[${JSON.stringify(data)}]`);
+    throw new Error(`Missing required data to create a ${RSSItem.name}:[${JSON.stringify(data)}]`);
   }
 
   title: string;
@@ -73,7 +73,7 @@ export class RSSEnclosure {
     this.type = type;
   }
 
-  static fromObject(data: any): RSSEnclosure {
+  static fromObject(data: Object): RSSEnclosure {
     if (data && data.url && data.length && data.type) {
       return new RSSEnclosure(
         data.url,
@@ -81,7 +81,7 @@ export class RSSEnclosure {
         data.type
       );
     }
-    throw new Error(`Missing required data to create a RSSEnclosure:[${JSON.stringify(data)}]`);
+    throw new Error(`Missing required data to create a ${RSSEnclosure.name}:[${JSON.stringify(data)}]`);
   }
 
   url: string; // URL
@@ -136,7 +136,7 @@ export class RSSSource {
     this.url = url;
   }
 
-  static fromObject(data: any): RSSSource {
+  static fromObject(data: Object): RSSSource {
     if (data && data.url) {
       return new RSSSource(data.url);
     }
