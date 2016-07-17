@@ -16,6 +16,10 @@
   ],
   "author": "Caleb Morris <caleb.morris.g@gmail.com>",
   "license": "MIT",
+  "repository" : {
+    "type" : "git",
+    "url" : "https://gitlab.com/CalebMorris/rss-spec"
+  },
   "devDependencies": {
     "babel-cli": "^6.10.1",
     "babel-eslint": "^6.1.2",
