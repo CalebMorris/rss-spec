@@ -4,10 +4,12 @@
   "description": "RSS feed and item specification",
   "main": "./dist/index.js",
   "scripts": {
-    "build": "rm -Rf ./dist && ./node_modules/.bin/babel . --ignore ./node_modules --out-dir ./dist/",
+    "build": "rm -Rf ./dist && ./node_modules/.bin/babel . --out-dir ./dist/ --ignore ./node_modules,./test",
     "lint": "./node_modules/.bin/eslint src test *.js",
-    "test": "npm run build && ./node_modules/.bin/mocha --recursive",
-    "prepublish": "npm run build"
+    "pretest": "npm run build",
+    "test": "./node_modules/.bin/mocha --recursive",
+    "prepublish": "npm run build",
+    "postinstall": "[ -d ./dist/ ] || npm run build"
   },
   "keywords": [
     "RSS",
