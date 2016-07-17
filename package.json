@@ -1,6 +1,6 @@
 {
   "name": "rss-spec",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "RSS feed and item specification",
   "main": "./dist/index.js",
   "scripts": {
