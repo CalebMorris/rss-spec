@@ -2,6 +2,8 @@
 
 import type moment from 'iflow-moment';
 
+import ContentChild, { missingRequiredDataError } from './RSSCore';
+
 /**
  * Base RSS feed item specifications
  * Spec: http://cyber.law.harvard.edu/rss/rss.html#hrelementsOfLtitemgt
@@ -9,15 +11,15 @@ import type moment from 'iflow-moment';
  */
 export default class RSSItem {
   constructor(
-    title: string,
-    description: string,
-    link?: ?string = null,
-    author?: ?string = null,
+    title: ContentChild<string>,
+    description: ContentChild<string>,
+    link?: ?ContentChild<string> = null,
+    author?: ?ContentChild<string> = null,
     category?: ?RSSCategory = null,
-    comments?: ?string = null,
+    comments?: ?ContentChild<string> = null,
     enclosure?: ?RSSEnclosure = null,
     guid?: ?RSSGuid = null,
-    pubDate?: ?moment = null,
+    pubDate?: ?ContentChild<moment> = null,
     source?: ?RSSSource = null
   ) {
     this.title = title;
@@ -30,10 +32,14 @@ export default class RSSItem {
     this.guid = guid;
     this.pubDate = pubDate;
     this.source = source;
+
+    if (! title || ! description) {
+      throw missingRequiredDataError.call(this);
+    }
   }
 
   static fromObject(data: Object): RSSItem {
-    if (data && (data.title || data.description)) {
+    if (data) {
       return new RSSItem(
         data.title,
         data.description,
@@ -47,18 +53,19 @@ export default class RSSItem {
         data.source
       );
     }
-    throw new Error(`Missing required data to create a ${RSSItem.name}:[${JSON.stringify(data)}]`);
+
+    throw missingRequiredDataError.call(this, data);
   }
 
-  title: string;
-  description: string;
-  link: ?string; // URL
-  author: ?string; // Email
+  title: ContentChild<string>;
+  description: ContentChild<string>;
+  link: ?ContentChild<string>; // URL
+  author: ?ContentChild<string>; // Email
   category: ?RSSCategory;
-  comments: ?string; // URL
+  comments: ?ContentChild<string>; // URL
   enclosure: ?RSSEnclosure;
   guid: ?RSSGuid; // GUID
-  pubDate: ?moment;
+  pubDate: ?ContentChild<moment>;
   source: ?RSSSource; // url
 }
 
@@ -71,17 +78,21 @@ export class RSSEnclosure {
     this.url = url;
     this.length = length;
     this.type = type;
+
+    if (! url || ! length || ! type) {
+      throw missingRequiredDataError.call(this);
+    }
   }
 
   static fromObject(data: Object): RSSEnclosure {
-    if (data && data.url && data.length && data.type) {
+    if (data) {
       return new RSSEnclosure(
         data.url,
         data.length,
         data.type
       );
     }
-    throw new Error(`Missing required data to create a ${RSSEnclosure.name}:[${JSON.stringify(data)}]`);
+    throw missingRequiredDataError.call(this, data);
   }
 
   url: string; // URL
@@ -89,58 +100,65 @@ export class RSSEnclosure {
   type: string; // mime-type
 }
 
-export class RSSCategory {
+export class RSSCategory extends ContentChild<string> {
   constructor(
     content: string,
     domain?: ?string = null
   ) {
-    this.content = content;
+    super(content);
     this.domain = domain;
   }
 
   static fromObject(data: Object): RSSCategory {
-    if (data && data.content) {
+    if (data) {
       return new RSSCategory(
         data.content,
         data.domain
       );
     }
-    throw new Error(`Missing required data to create a ${RSSCategory.name}:[${JSON.stringify(data)}]`);
+    throw missingRequiredDataError.call(this, data);
   }
 
-  content: string;
   domain: ?string; // URL
 }
 
-export class RSSGuid {
+export class RSSGuid extends ContentChild<string> {
   constructor(
+    content: string,
     isPermaLink?: ?boolean
   ) {
+    super(content);
     this.isPermaLink = isPermaLink;
   }
 
   static fromObject(data: Object): RSSGuid {
     if (data) {
-      return new RSSGuid(data.isPermaLink);
+      return new RSSGuid(data.content, data.isPermaLink);
     }
-    throw new Error(`Missing required data to create a ${RSSGuid.name}:[${JSON.stringify(data)}]`);
+    throw missingRequiredDataError.call(this, data);
   }
 
   isPermaLink: ?boolean;
 }
 
-export class RSSSource {
+export class RSSSource extends ContentChild<string> {
   constructor(
+    content: string,
     url: string
   ) {
+    super(content);
     this.url = url;
+
+    if (! url) {
+      throw missingRequiredDataError.call(this);
+    }
   }
 
   static fromObject(data: Object): RSSSource {
-    if (data && data.url) {
-      return new RSSSource(data.url);
+    if (data) {
+      return new RSSSource(data.content, data.url);
     }
-    throw new Error(`Missing required data to create a ${RSSSource.name}:[${JSON.stringify(data)}]`);
+    throw missingRequiredDataError.call(this, data);
   }
 
   url: string;
