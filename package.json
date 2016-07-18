@@ -2,20 +2,18 @@
   "name": "rss-spec",
   "version": "1.0.0",
   "description": "RSS feed and item specification",
-  "main": "./dist/index.js",
+  "main": "./src/index.js",
   "scripts": {
-    "build": "rm -Rf ./dist && ./node_modules/.bin/babel ./src/ --out-dir ./dist/",
     "lint": "./node_modules/.bin/eslint src test *.js",
     "flow": "./node_modules/.bin/flow check",
-    "pretest": "npm run build",
-    "test": "./node_modules/.bin/mocha --recursive",
-    "prepublish": "npm run build"
+    "test": "./node_modules/.bin/mocha --compilers js:babel-register --recursive"
   },
   "keywords": [
     "RSS",
     "xml",
     "feed",
-    "spec"
+    "spec",
+    "es6"
   ],
   "author": "Caleb Morris <caleb.morris.g@gmail.com>",
   "license": "MIT",
