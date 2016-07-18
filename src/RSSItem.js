@@ -13,14 +13,14 @@ export default class RSSItem {
   constructor(
     title: ContentChild<string>,
     description: ContentChild<string>,
-    link?: ?ContentChild<string> = null,
-    author?: ?ContentChild<string> = null,
-    category?: ?RSSCategory = null,
-    comments?: ?ContentChild<string> = null,
-    enclosure?: ?RSSEnclosure = null,
-    guid?: ?RSSGuid = null,
-    pubDate?: ?ContentChild<moment> = null,
-    source?: ?RSSSource = null
+    link?: ?ContentChild<string>,
+    author?: ?ContentChild<string>,
+    category?: ?RSSCategory,
+    comments?: ?ContentChild<string>,
+    enclosure?: ?RSSEnclosure,
+    guid?: ?RSSGuid,
+    pubDate?: ?ContentChild<moment>,
+    source?: ?RSSSource
   ) {
     this.title = title;
     this.description = description;

@@ -1,6 +1,7 @@
 /* @flow */
 
 import RSSItem, { RSSCategory } from './RSSItem';
+import ContentChild, { missingRequiredDataError } from './RSSCore';
 
 import type moment from 'iflow-moment';
 
@@ -10,31 +11,31 @@ import type moment from 'iflow-moment';
  */
 export default class RSSFeed {
   constructor(
-    title: string,
-    link: string,
-    description: string,
-    version: ?string = null,
-    items: Set<RSSItem> = new Set([]),
-    language: ?string = null,
-    copyright: ?string = null,
-    managingEditor: ?string = null,
-    webMaster: ?string = null,
-    pubDate: ?moment = null,
-    lastBuildDate: ?moment = null,
-    category: ?RSSCategory = null,
-    generator: ?string = null,
-    docs: ?string = null,
-    cloud: ?RSSCloud = null,
-    ttl: ?number = null,
-    image: ?RSSImage = null,
-    skipHours: ?number = null,
-    skipDays: ?string = null
+    title: ContentChild<string>,
+    link: ContentChild<string>,
+    description: ContentChild<string>,
+    items?: Set<RSSItem> = new Set([]),
+    version?: ?ContentChild<string>,
+    language?: ?ContentChild<string>,
+    copyright?: ?ContentChild<string>,
+    managingEditor?: ?ContentChild<string>,
+    webMaster?: ?ContentChild<string>,
+    pubDate?: ?ContentChild<moment>,
+    lastBuildDate?: ?ContentChild<moment>,
+    category?: ?RSSCategory,
+    generator?: ?ContentChild<string>,
+    docs?: ?ContentChild<string>,
+    cloud?: ?RSSCloud,
+    ttl?: ?ContentChild<number>,
+    image?: ?RSSImage,
+    skipHours?: ?ContentChild<number>,
+    skipDays?: ?ContentChild<string>
   ) {
     this.title = title;
     this.link = link;
     this.description = description;
-    this.version = version;
     this.items = items;
+    this.version = version;
     this.language = language;
     this.copyright = copyright;
     this.managingEditor = managingEditor;
@@ -49,16 +50,20 @@ export default class RSSFeed {
     this.image = image;
     this.skipHours = skipHours;
     this.skipDays = skipDays;
+
+    if (! title || ! link || ! description) {
+      throw missingRequiredDataError.call(this);
+    }
   }
 
   static fromObject(data: any): RSSFeed {
-    if (data && data.title && data.link && data.description) {
+    if (data) {
       return new RSSFeed(
         data.title,
         data.link,
         data.description,
-        data.version,
         data.items,
+        data.version,
         data.language,
         data.copyright,
         data.managingEditor,
@@ -75,31 +80,31 @@ export default class RSSFeed {
         data.skipDays
       );
     }
-    throw new Error(`Missing required data to create a RSSItem:[${JSON.stringify(data)}]`);
+    throw missingRequiredDataError.call(this, data);
   }
 
   // Required
-  title: string;
-  link: string; // URL
-  description: string;
+  title: ContentChild<string>;
+  link: ContentChild<string>; // URL
+  description: ContentChild<string>;
 
   // Optional
-  version: ?string;
   items: Set<RSSItem>;
-  language: ?string; // WC3 spec: en-us
-  copyright: ?string;
-  managingEditor: ?string; // Email
-  webMaster: ?string; // Email
-  pubDate: ?moment;
-  lastBuildDate: ?moment;
+  version: ?ContentChild<string>;
+  language: ?ContentChild<string>; // WC3 spec: en-us
+  copyright: ?ContentChild<string>;
+  managingEditor: ?ContentChild<string>; // Email
+  webMaster: ?ContentChild<string>; // Email
+  pubDate: ?ContentChild<moment>;
+  lastBuildDate: ?ContentChild<moment>;
   category: ?RSSCategory;
-  generator: ?string;
-  docs: ?string; // URL
+  generator: ?ContentChild<string>;
+  docs: ?ContentChild<string>; // URL
   cloud: ?RSSCloud;
-  ttl: ?number;
+  ttl: ?ContentChild<number>;
   image: ?RSSImage;
-  skipHours: ?number; // integer 0-23, 0 is midnight
-  skipDays: ?string; // Monday, Tuesday, Wednesday, Thursday, Friday, Saturday or Sunday
+  skipHours: ?ContentChild<number>; // integer 0-23, 0 is midnight
+  skipDays: ?ContentChild<string>; // Monday, Tuesday, Wednesday, Thursday, Friday, Saturday or Sunday
 
   // rating: any; // Not supported
   // textInput: obj; // Not supported
@@ -142,12 +147,12 @@ export class RSSCloud {
 
 export class RSSImage {
   constructor(
-    url: string,
-    title: string,
-    link: string,
-    width: ?number = null,
-    height: ?number = null,
-    description: ?string = null
+    url: ContentChild<string>,
+    title: ContentChild<string>,
+    link: ContentChild<string>,
+    width?: ?ContentChild<number>,
+    height?: ?ContentChild<number>,
+    description?: ?ContentChild<string>
   ) {
     this.url = url;
     this.title = title;
@@ -155,10 +160,14 @@ export class RSSImage {
     this.width = width;
     this.height = height;
     this.description = description;
+
+    if (! url || ! title || ! width) {
+      throw missingRequiredDataError.call(this);
+    }
   }
 
   static fromObject(data: any): RSSImage {
-    if (data && data.content) {
+    if (data) {
       return new RSSImage(
         data.url,
         data.title,
@@ -168,16 +177,16 @@ export class RSSImage {
         data.description
       );
     }
-    throw new Error(`Missing required data to create a RSSImage:[${JSON.stringify(data)}]`);
+    throw missingRequiredDataError.call(this, data);
   }
 
   // Required
-  url: string; // URL
-  title: string;
-  link: string; // URL
+  url: ContentChild<string>; // URL of image to render (GIF, JPEG or PNG)
+  title: ContentChild<string>;
+  link: ContentChild<string>; // URL of website
 
   // Optional
-  width: ?number; // Max: 144, Default: 88
-  height: ?number; // Max: 400, Default: 31
-  description: ?string;
+  width: ?ContentChild<number>; // Max: 144, Default: 88
+  height: ?ContentChild<number>; // Max: 400, Default: 31
+  description: ?ContentChild<string>;
 }
