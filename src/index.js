@@ -1,5 +1,5 @@
 import RSSFeed, { RSSCloud, RSSImage } from './RSSFeed';
-import RSSItem, { RSSCategory, RSSEnclosure } from './RSSItem';
+import RSSItem, { RSSCategory, RSSEnclosure, RSSGuid, RSSSource } from './RSSItem';
 import ContentChild from './RSSCore';
 
 export {
@@ -10,4 +10,6 @@ export {
   RSSFeed,
   RSSCloud,
   RSSImage,
+  RSSGuid,
+  RSSSource,
 };
