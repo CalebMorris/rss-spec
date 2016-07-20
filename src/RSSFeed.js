@@ -28,8 +28,8 @@ export default class RSSFeed {
     cloud?: ?RSSCloud,
     ttl?: ?ContentChild<number>,
     image?: ?RSSImage,
-    skipHours?: ?ContentChild<number>,
-    skipDays?: ?ContentChild<string>
+    skipHours?: Set<number> = new Set([]),
+    skipDays?: Set<string> = new Set([])
   ) {
     this.title = title;
     this.link = link;
