@@ -33,7 +33,9 @@
     "eslint-plugin-flowtype": "^2.3.0",
     "eslint-plugin-react": "^5.2.2",
     "flow-bin": "^0.29.0",
-    "iflow-moment": "^1.1.13",
     "mocha": "^2.5.3"
+  },
+  "dependencies": {
+    "iflow-moment": "^1.1.13"
   }
 }
