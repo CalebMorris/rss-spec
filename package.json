@@ -31,7 +31,6 @@
     "eslint": "^3.0.1",
     "eslint-config-honu-base": "git+ssh@gitlab.com:CalebMorris/eslint-config-honu-base.git",
     "eslint-plugin-flowtype": "^2.3.0",
-    "eslint-plugin-react": "^5.2.2",
     "flow-bin": "^0.29.0",
     "mocha": "^2.5.3"
   },
