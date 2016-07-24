@@ -2,11 +2,14 @@
   "name": "rss-spec",
   "version": "1.0.0",
   "description": "RSS feed and item specification",
-  "main": "./src/index.js",
+  "main": "./dist/index.js",
   "scripts": {
+    "build": "./node_modules/.bin/babel -d dist src/",
     "lint": "./node_modules/.bin/eslint src test *.js",
     "flow": "./node_modules/.bin/flow check",
-    "test": "./node_modules/.bin/mocha --compilers js:babel-register --recursive"
+    "pretest": "npm run build",
+    "test": "./node_modules/.bin/mocha --compilers js:babel-register --recursive",
+    "prepublish": "npm run build"
   },
   "keywords": [
     "RSS",

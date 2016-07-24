@@ -1,6 +1,6 @@
 var expect = require('chai').expect;
 
-var rssSpec = require('../src');
+var rssSpec = require('../dist');
 
 describe('Load', function() {
   it('should contain all expected types', function() {
