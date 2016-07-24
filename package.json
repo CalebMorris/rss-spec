@@ -29,7 +29,7 @@
     "babel-preset-stage-0": "^6.5.0",
     "chai": "^3.5.0",
     "eslint": "^3.0.1",
-    "eslint-config-honu-base": "git+ssh@gitlab.com:CalebMorris/eslint-config-honu-base.git",
+    "eslint-config-honu-base": "^0.3.0",
     "eslint-plugin-flowtype": "^2.3.0",
     "flow-bin": "^0.29.0",
     "mocha": "^2.5.3"
