@@ -22,7 +22,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://gitlab.com/CalebMorris/rss-spec"
+    "url": "https://github.com/CalebMorris/rss-spec"
   },
   "devDependencies": {
     "babel-cli": "^6.10.1",
